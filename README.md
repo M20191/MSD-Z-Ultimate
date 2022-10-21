@@ -38,8 +38,10 @@ Specially designed to be run on **linux server/Windows Server (Beta)**
 * Purpur  
 * Paper 
 * Spigot
+* Sponge
 * Waterfall
 * Velocity
+
 
 ## ☀ Features
 
@@ -68,9 +70,9 @@ python3 .\mainESLinux.py
 ```
 
 ### ⚙ Future To-do List:
-- [ ] Sponge (SOON.... XX/10/22)
 - [ ] Pufferfish (IDK)
 - [ ] Other versions of minecraft/jars/forks
 - [ ] New Ideas...
+- [x] Sponge 
 - [x] File documentation
 - [x] Document Better

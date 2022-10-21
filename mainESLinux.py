@@ -9,8 +9,7 @@ import subprocess
 import time
 
 def extract_json(file : str) -> dict[str,Any]:
-	"""
-	Returns a JSON object in which we can extract information from the downloaded server.\n
+	"""Returns a JSON object in which we can extract information from the downloaded server.\n
 	Args:\n
 		* file (str): JSON file
 
@@ -23,8 +22,7 @@ def extract_json(file : str) -> dict[str,Any]:
 		return json_file
 
 def eula_ram_sh():
-	"""
-	Setup configurations
+	"""Setup configurations
 	* Requests RAM value
 	* Accepts the EULAMC
 	* Generate the start.sh
@@ -46,8 +44,7 @@ def eula_ram_sh():
 		open("iniciar.sh","w").write(f"java -Xmx{ram}G -Xms{ram}G -jar {information['jar']}.jar")
 
 def download_server():
-	"""
-	Download and install the jar/fork
+	"""Download and install the jar/fork
 	* List jars/forks/versions with the API (https://api-msd-z.matiasing.repl.co/versions)
 	* Download the jar/fork
 	* Store relevant information in information.json
@@ -57,7 +54,7 @@ def download_server():
 	"""
 
 	# List of available API versions
-	versions_get = requests.get("https://api-msd-z.matiasing.repl.co/versions")
+	versions_get = requests.get("http://localhost:5000/versions")
 	print("Selecciona tu version a descargar")
 	for jars_forks in versions_get.json().keys():
 		print(f"- {jars_forks}")
@@ -89,8 +86,7 @@ def download_server():
 	else:print("Version erronea");download_server()
 
 def import_server():
-	"""
-	Extract information to JSON Setup file, download and install server\n
+	"""Extract information to JSON Setup file, download and install server\n
 		* Name
 		* Version
 		* Jar
@@ -133,8 +129,7 @@ def create_setup_server():
 	json.dump(log,open(f"{name_setup}","w"))
 
 def start_server():
-	"""
-	Start server from start.sh with the server name (line 79)\n
+	"""Start server from start.sh with the server name (line 79)\n
 	`screen -S {name} sh iniciar.sh
 	"""
 
@@ -152,8 +147,7 @@ def entry_server():
 	subprocess.call(f"screen -r {name}",shell=True)
 
 def close_server():
-	"""
-	Close the server with the own name\n
+	"""Close the server with the own name\n
 	`screen -S {name} p 0 -X stuff "stop^M
 	"""
 	print("Cerrando el servidor...")
@@ -165,8 +159,7 @@ def close_server():
 	print("Servidor cerrado con exito")
 
 def brute_close_server():
-	"""
-	Close your server using brute forse\n
+	"""Close your server using brute forse\n
 	`screen -S {name} -X quit
 	"""
 	print("No se recomienda cerrarlo de esta forma podria causar problemas... CTRL+C Para salir")
@@ -177,8 +170,7 @@ def brute_close_server():
 	subprocess.call(f"screen -S {name} -X quit",shell=True)
 
 def delete_server():
-	"""
-	Remove all files from your path server\n
+	"""Remove all files from your path server\n
 	`ls | grep -v *.py | xargs rm -fr
 	"""
 	print("Estas por borrar todos los archivos del servidor CTRL+C Para salir")

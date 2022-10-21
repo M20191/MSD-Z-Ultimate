@@ -1,0 +1,10 @@
+Time to ping 2022-10-19 09:09:29.724041
+Ip mc.hypixel.net
+Players 27669
+Max/Players 100000
+Availability 72331
+Latency 239
+Version/Bunge Requires MC 1.8 / 1.19
+Description                 Hypixel Network [1.8-1.19]
+       SKYBLOCK 0.15 - HALLOWEEN EVENT
+Status Active

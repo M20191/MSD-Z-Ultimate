@@ -3,10 +3,13 @@
 # Create by M20191
 
 # Import modules
+import os
+import argparse
+import platform
+import re
 from mcstatus import MinecraftServer
 from datetime import datetime
 from typing import Any
-import re
 
 def server(server_name: str) -> dict[str, Any]:
 	"""
@@ -28,17 +31,27 @@ def information_server():
 	"""
 	Main function printing server information
 	"""
+	# Initialize parser
+	parser = argparse.ArgumentParser()
+	
+	# Adding optional argument
+	parser.add_argument("-ip", "--host", help="Ip address to connsult data", type=str)
+	parser.add_argument("-o", "--outfile", help="Outfile to saved ping data", type=str)
+	parser.add_argument("-r", "--recon", help="Return the OS of server",action="store_true")
+	# Read arguments from command line
+	args = parser.parse_args()
+
 	# Get name of server
-	server_name = input("Server name: ")
-	info_server = server(server_name)
+	info_server = server(args.host)
 
 	# server error
-	if info_server==0:print("Error server ping");exit()
+	if info_server==0 or args.host == None:print("Error server ping | [!] python ping_server.py -ip mc.hypixel.net");exit()
 
 	# Information of server
 	information_server = {
 		"Time to ping":datetime.now(),
-		"Ip":server_name,
+		"Ip":args.host,
+		"Port":info_server.version.protocol,
 		"Players":info_server.players.online,
 		"Max/Players":info_server.players.max,
 		"Availability":info_server.players.max - info_server.players.online,
@@ -52,13 +65,23 @@ def information_server():
 	for i,x in information_server.items():
 		print(f'{i}: {x}')
 
+	# Save into a log file
+	if args.outfile:
+		with open(args.outfile,"w", encoding='utf-8') as w:w.write('\n'.join(f"{xd[0]} {xd[1]}" for xd in ([i,x] for i, x in information_server.items())))
+
+	# Print OS
+	if args.recon:
+		# Recon OS exect script
+		system = platform.system()
+		if system == "Windows":
+			# Run command
+			cmd = os.system(f'ping -nl 1 {args.host} | find /I "TTL" > ttl.tmp')
+			ttl = open('ttl.tmp','r').read().split(" ")[-1]
+			print("OS: Linux ->",ttl) if int(ttl.split("=")[1]) <= 64 else print("OS: Windows ->",ttl)
+			os.system("del ttl.tmp")
+		else:
+			pass
 # Core
 if __name__ == '__main__':
-	while True:
-		option = int(input("""
-		[1]Ping server
-		... 
-		"""))
-		# Main
-		if option == 1:information_server()
-		else:exit()
+	# Main
+	information_server()
