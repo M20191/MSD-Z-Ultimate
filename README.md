@@ -16,9 +16,9 @@
 </p>
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue?style=flat-square&logo=python"></a>
-  <br>
   <a href="#"><img src="https://img.shields.io/badge/LINUX-blue?style=flat-square&logo=linux"></a>
   <a href="#"><img src="https://img.shields.io/badge/WINDOWS-blue?style=flat-square&logo=windows"></a>
+  <br>
   <br>
   <a href="https://api-msd-z.matiasing.repl.co/"><img src="https://img.shields.io/badge/API-LINK-blue?style=for-the-badge"></a>
 
