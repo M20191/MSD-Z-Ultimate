@@ -70,6 +70,7 @@ python3 .\mainESLinux.py
 ```
 
 ### ⚙ Future To-do List:
+- [ ] Option to use it in localhost
 - [ ] Pufferfish (IDK)
 - [ ] Other versions of minecraft/jars/forks
 - [ ] New Ideas...

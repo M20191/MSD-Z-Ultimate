@@ -54,7 +54,7 @@ def download_server():
 	"""
 
 	# List of available API versions
-	versions_get = requests.get("http://localhost:5000/versions")
+	versions_get = requests.get("https://api-msd-z.matiasing.repl.co/versions")
 	print("Selecciona tu version a descargar")
 	for jars_forks in versions_get.json().keys():
 		print(f"- {jars_forks}")
