@@ -34,7 +34,6 @@ Specially designed to be run on **linux server/Windows Server (Beta)**
 
 
 ## 🌿 Jar's Versions
-
 * Purpur  
 * Paper 
 * Spigot
@@ -42,9 +41,12 @@ Specially designed to be run on **linux server/Windows Server (Beta)**
 * Waterfall
 * Velocity
 
+## ⭐ New Features!
+* CLI Mode
+* Connect API
+* PageWeb with all links - Rebranding
 
 ## ☀ Features
-
 * Download Server
 * Start server
 * Open console
@@ -54,10 +56,13 @@ Specially designed to be run on **linux server/Windows Server (Beta)**
 * Deleted Server
 * Download plugins
 * Import server
+* Use it in localhost
  
-## ⭐ New Features!
-* Connect API
-* PageWeb with all links - Rebranding
+
+## 🔧 CLI Commands Arguments
+```
+-url | --host    [ Set url to requests ]
+```
 
 ## 🛠 Downloading repo, and cd path:
 ```console
@@ -70,10 +75,9 @@ python3 .\mainESLinux.py
 ```
 
 ### ⚙ Future To-do List:
-- [ ] Option to use it in localhost
-- [ ] Pufferfish (IDK)
+- [ ] Pufferfish
 - [ ] Other versions of minecraft/jars/forks
-- [ ] New Ideas...
+- [x] Option to use it in localhost
 - [x] Sponge 
 - [x] File documentation
 - [x] Document Better
