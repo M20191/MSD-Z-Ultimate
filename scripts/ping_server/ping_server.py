@@ -12,7 +12,15 @@ from datetime import datetime
 from typing import Any
 
 
-def get_os(args):
+def get_os(args:dict[str:str]) -> str:
+	"""Recon Mode, get OS of server
+
+	Args:
+		args (dict[str:str]): Args command line
+
+	Returns:
+		str: OS | TTL
+	"""
 	# Recon OS exectscript
 	system = platform.system()
 
@@ -32,7 +40,7 @@ def get_os(args):
 	# Beta
 
 
-def server(server_name: str) -> dict[str, Any]:
+def server(server_name: str) -> dict[str:str]:
 	"""
 	Returns a object in which we can extract information from server pinged.\n
 	Args:\n

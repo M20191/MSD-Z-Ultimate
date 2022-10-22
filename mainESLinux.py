@@ -3,10 +3,25 @@
 
 # Import modules
 from typing import Any
-import requests
-import json
-import subprocess
-import time
+import sys,signal,time,subprocess,json,requests,argparse
+
+
+# CTRL+C
+def def_handler(sig, frame):
+    print("\n\Cancelando...\n")
+    sys.exit(1)
+
+# Ctrl+C
+signal.signal(signal.SIGINT, def_handler)
+
+
+# CLI
+def cli():
+   parser = argparse.ArgumentParser()
+   parser.add_argument('-url','--host', help='Host for requests', required=False)
+   args = parser.parse_args()
+   
+   return args
 
 def extract_json(file : str) -> dict[str,Any]:
 	"""Returns a JSON object in which we can extract information from the downloaded server.\n
@@ -52,9 +67,14 @@ def download_server():
 		* Jar (Jar installed)
 		* Version (Version installed)
 	"""
+	
+	# global url var
+	args = cli()	
+	link_api = "https://api-msd-z.matiasing.repl.co"
+	if args.host:link_api = args.host
 
 	# List of available API versions
-	versions_get = requests.get("https://api-msd-z.matiasing.repl.co/versions")
+	versions_get = requests.get(f"{link_api}/versions")
 	print("Selecciona tu version a descargar")
 	for jars_forks in versions_get.json().keys():
 		print(f"- {jars_forks}")
@@ -71,7 +91,7 @@ def download_server():
 		version_jar_fork = input("\nVersion: ")
 		
 		# Using the API extracts the link to the selected version/fork/jar, then proceeds to install it using a wget
-		url = requests.get(f"https://api-msd-z.matiasing.repl.co/{jar_fork}/{version_jar_fork}")
+		url = requests.get(f"{link_api}/{jar_fork}/{version_jar_fork}")
 		subprocess.call(f"wget -t 100 -O {jar_fork}.jar {url.json()['link']}",shell=True)
 
 		name = input("Asignar nombre al servidor (sin espacios): ")
@@ -203,4 +223,4 @@ if __name__ == "__main__":
 		elif option == 6:brute_close_server()
 		elif option == 7:eula_ram_sh()
 		elif option == 8:delete_server()
-		else:print("Exit")
+		else:print("Exit");sys.exit(1)
