@@ -11,6 +11,27 @@ from mcstatus import MinecraftServer
 from datetime import datetime
 from typing import Any
 
+
+def get_os(args):
+	# Recon OS exectscript
+	system = platform.system()
+
+	if system == "Windows":
+		# Run command
+		cmd = os.system(f'ping -nl 1 {args.host} | find /I "TTL" > ttl.tmp')
+		ttl = open('ttl.tmp','r').read().split(" ")[-1]
+		# Remove tmp ping ttl
+		os.system("del ttl.tmp")
+		
+		if int(ttl.split("=")[1]) <= 64:
+			return f"OS: Linux | {ttl}"
+		
+		return f"OS: Windows | {ttl}"
+
+	# Else platform Linux
+	# Beta
+
+
 def server(server_name: str) -> dict[str, Any]:
 	"""
 	Returns a object in which we can extract information from server pinged.\n
@@ -71,16 +92,7 @@ def information_server():
 
 	# Print OS
 	if args.recon:
-		# Recon OS exect script
-		system = platform.system()
-		if system == "Windows":
-			# Run command
-			cmd = os.system(f'ping -nl 1 {args.host} | find /I "TTL" > ttl.tmp')
-			ttl = open('ttl.tmp','r').read().split(" ")[-1]
-			print("OS: Linux ->",ttl) if int(ttl.split("=")[1]) <= 64 else print("OS: Windows ->",ttl)
-			os.system("del ttl.tmp")
-		else:
-			pass
+		print(get_os(args))
 # Core
 if __name__ == '__main__':
 	# Main
